@@ -2,7 +2,7 @@
 
 .topBar {
 	width: 100%;
-
+	gap: 50px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -59,12 +59,16 @@
 
 	&__controls {
         display: flex;
+		flex-grow:1;
+		justify-content: center;
         &-inputGroup {
             position: relative;
-            flex:1;
+			flex-grow: 1;
+			max-width: 600px;
         }
 
 		&-inputText {
+			width: 100%;
 			outline: 0;
 			border: 1px solid $lightBlack2;
 			background-color: $lightBlack0;
@@ -76,12 +80,14 @@
 			color: $white;
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
-            width: 500px;
-
 
 			&:focus {
 				border: 1px solid $blue1;
+				width: 100%;
+				border-radius: 0
 			}
+			
+
 			&-kbIcon {
 				opacity: 0.7;
                 position: absolute;
@@ -92,15 +98,39 @@
 					cursor: pointer;
 				}
 			}
+			&-searchIcon{
+				position: absolute;
+				left: -34px;
+				width: 35px;
+				display: flex;
+				padding-left: 7px;
+				align-items: center;
+				justify-content: center;
+				background-color: $lightBlack0;
+				height: 100%;
+				border: 1px solid $lightBlack2;
+				border-right:0;
+				font-size: 1.7rem;
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+				display: none;
+				&--active{
+					display: flex;
+					border: 1px solid $blue1;
+					border-right: 0;
+				}
+			}
 		}
 		&-searchBtn {
 			background-color: $lightBlack2;
 			width: 65px;
-            font-size: 1.8rem;
+            min-width: 40px;
+			font-size: 1.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+
 		}
         &-mic{
             background-color: $lightBlack0;
@@ -110,18 +140,33 @@
             justify-content: center;
             font-size: 1.8rem;
             margin-left: 10px;    
-            width: 43px;
-            height: 43px;
+            min-width: 43px;
+            min-height: 43px;
+			position: relative;
             cursor: pointer;
+			&:hover .comment{
+				animation: fadeIn .5s;
+				display: block;
+			}
         }
 	}
-
-    &__addVideo{
+	
+    &__addVideo,
+	&__news,
+	&__searchVideo{
         cursor: pointer;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		&:hover .comment{
+			animation: fadeIn .5s;
+			display: block;
+		}
+		
     }
-    &__news{
-        cursor: pointer;
-    }
+	&__searchVideo{display: none;}
     &__account{
         border-radius: 50%;
         background-color: $blue1;
@@ -138,5 +183,66 @@
         align-items: center;
         justify-content: center;
         gap: 30px;
+		
     }
+
+	@media (max-width:$jump1) {
+		&__controls{
+			display: none;
+		}
+		&__searchVideo{
+			display: block;
+		}
+	}
+	@media (max-width:$jump2) {
+		padding: 0px 10px;
+		height: 50px;
+		&__news,
+		&__addVideo{
+			display: none;
+		}
+		&__menuBtn {
+		display: none;
+		}
+		&__searchVideo{
+			font-size: 1.8rem;
+		}
+		&__account{
+			height: 30px;
+			width: 30px;
+			font-size: 1.6rem;
+		}
+		&__logo{
+			font-size: 1.8rem;
+			&-textSup {
+				display: none;
+			}
+			&-icon{
+				font-size: 3rem;
+				background-size: 20px 12px;
+			}
+		}
+		
+	}
+	
+}
+
+@keyframes fadeIn {
+	0%{
+		display: flex;
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+.comment{
+	position: absolute;
+	font-size: 1.3rem;
+	bottom: -50px;
+	background-color: $gray1;
+	padding: 6px 10px;
+	display: none;
+	text-align: center;
+	white-space: nowrap;
 }
